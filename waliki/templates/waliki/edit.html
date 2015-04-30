@@ -52,8 +52,15 @@
     <div class="tab-pane active pad" id="editor">
 
         <form method="post" class="form">
-            {% csrf_token %}
-            {{ form|render_form }}
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  {% csrf_token %}
+                  {{ form|render_form }}
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="live-preview"></div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-sm-12 col-md-12">
@@ -106,6 +113,8 @@
 
   {{ block.super }}
 
+  <script type="text/javascript"></script>
+
 <script type="text/javascript">
 $('#previewlink').on('click', function() {
     var $form = $('.form');
@@ -137,6 +146,39 @@ $('#previewbtn').on('click', function(event) {
     event.preventDefault();
     $('#previewlink').click();
 });
+
+$(function() {
+  // var editor = $('.CodeMirror')[0].CodeMirror;
+  var updateLivePreview = function() {
+    var $form = $('.form');
+    var $inputs = $form.find('input, textarea, button');
+    var $pre = $('#live-preview');
+    var bodycontent = editor.getValue();
+    $.ajax({
+      url: "{% url 'waliki_preview' %}",
+      type: "POST",
+      data: { text: bodycontent, markup: '{{ page.markup }}' },
+      success: function(msg) {
+        $pre.removeClass('alert').removeClass('alert-error').html(msg.html);
+        {% if WALIKI_USE_MATHJAX %}
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        {% endif %}
+      },
+      error: function() {
+        $pre.addClass('alert').addClass('alert-error');
+        $pre.html('{% trans "There was a problem with the preview." %}');
+      }
+    });
+
+  };
+  updateLivePreview();
+  editor.on('change', _.debounce(updateLivePreview, 3000));
+});
+
+/*$('#id_raw').on('change', function() {
+  var contents = $(this).val();
+  console.log('contents');
+});*/
 
 var cm_settings = {{ cm_settings|safe }};
 </script>
