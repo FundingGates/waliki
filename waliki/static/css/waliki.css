@@ -9,7 +9,7 @@ textarea#body {
   font-size: 13px;
 }
 
-// diff
+/* diff */
 
 span.ins, span.del {
     padding: 3px;
