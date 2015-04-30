@@ -53,11 +53,11 @@
 
         <form method="post" class="form">
             <div class="row">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-7">
                   {% csrf_token %}
                   {{ form|render_form }}
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-5">
                   <div id="live-preview"></div>
                 </div>
             </div>
