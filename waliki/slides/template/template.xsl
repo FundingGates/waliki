@@ -34,11 +34,11 @@ xmlns="http://www.w3.org/1999/xhtml">
       </meta>
     </xsl:if>
 
-    <link rel="stylesheet" href="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/css/hovercraft.css" media="all"></link>
-    <link rel="stylesheet" href="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/css/impressConsole.css" media="all"></link>
-    <link rel="stylesheet" href="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/css/highlight.css" media="all"></link>
+    <link rel="stylesheet" href="/static/css/hovercraft.css" media="all"></link>
+    <link rel="stylesheet" href="/static/css/impressConsole.css" media="all"></link>
+    <link rel="stylesheet" href="/static/css/highlight.css" media="all"></link>
 
-    <link rel="stylesheet" href="//github.com/regebro/hovercraft/blob/master/docs/examples/hovercraft.css" media="screen,projection"></link>
+    <link rel="stylesheet" href="/static/css/hovercraftStyles.css" media="all"></link>
 
     <xsl:for-each select="/document/templateinfo/header/css">
         <link rel="stylesheet">
@@ -84,9 +84,9 @@ xmlns="http://www.w3.org/1999/xhtml">
     </div>
 
 
-    <script type="text/javascript" src="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/js/impress.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/js/impressConsole.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/regebro/hovercraft/master/hovercraft/templates/default/js/hovercraft.js"></script>
+    <script type="text/javascript" src="/static/js/impress.js"></script>
+    <script type="text/javascript" src="/static/js/impressConsole.js"></script>
+    <script type="text/javascript" src="/static/js/hovercraft.js"></script>
 
 </body>
 </html>
