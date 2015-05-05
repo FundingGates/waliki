@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpRespons
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import RequestContext
 from django.template.loader import render_to_string
+from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -41,7 +42,7 @@ def detail(request, slug, raw=False):
     elif raw:
         raise Http404
 
-    return render(request, 'waliki/detail.html', {'page': page, 'slug': slug})
+    return TemplateResponse(request, 'waliki/detail.html', {'page': page, 'slug': slug})
 
 
 @permission_required('change_page')
@@ -86,7 +87,7 @@ def move(request, slug):
         data = render_to_string('waliki/generic_form.html', {'page': page, 'form': form},
                                 context_instance=RequestContext(request))
         return HttpResponse(json.dumps({'data': data}), content_type="application/json")
-    return render(request, 'waliki/generic_form.html', {'page': page, 'form': form})
+    return TemplateResponse(request, 'waliki/generic_form.html', {'page': page, 'form': form})
 
 
 @permission_required('change_page')
@@ -162,7 +163,7 @@ def edit(request, slug):
 
     cm_settings = settings.WALIKI_CODEMIRROR_SETTINGS
     cm_settings.update({'mode': dict(cm_modes)[page.markup]})
-    return render(request, 'waliki/edit.html', {'page': page,
+    return TemplateResponse(request, 'waliki/edit.html', {'page': page,
                                                 'form': form,
                                                 'slug': slug,
                                                 'cm_modes': cm_modes,
@@ -200,7 +201,7 @@ def delete(request, slug):
         data = render_to_string('waliki/delete.html', {'page': page, 'form': form},
                                 context_instance=RequestContext(request))
         return HttpResponse(json.dumps({'data': data}), content_type="application/json")
-    return render(request, 'waliki/delete.html', {'page': page, 'form': form})
+    return TemplateResponse(request, 'waliki/delete.html', {'page': page, 'form': form})
 
 
 def new(request):
@@ -222,7 +223,7 @@ def new(request):
         data = render_to_string('waliki/generic_form.html', {'form': form},
                                 context_instance=RequestContext(request))
         return HttpResponse(json.dumps({'data': data}), content_type="application/json")
-    return render(request, 'waliki/generic_form.html', {'form': form})
+    return TemplateResponse(request, 'waliki/generic_form.html', {'form': form})
 
 
 def get_slug(request):
